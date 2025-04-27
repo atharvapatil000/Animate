@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I Love You Animation</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(#ffe6f0, #ffffff);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    /* HANDWRITTEN "I LOVE YOU" */
+    .handwritten {
+      font-family: 'Pacifico', cursive;
+      font-size: 50px;
+      color: #ff4081;
+      white-space: nowrap;
+      border-right: 3px solid;
+      width: 0;
+      overflow: hidden;
+      animation: typing 4s steps(11) forwards, blink 0.7s step-end infinite;
+      margin-bottom: 40px;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 12ch }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #ff4081; }
+    }
+
+    /* STICK FIGURES */
+    .stickboy, .stickgirl {
+      position: absolute;
+      bottom: 80px;
+      width: 100px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation-duration: 5s;
+      animation-fill-mode: forwards;
+    }
+
+    .stickboy {
+      left: -120px;
+      animation-name: moveBoy;
+      transform: scaleX(-1);
+    }
+
+    .stickgirl {
+      right: -120px;
+      animation-name: moveGirl;
+    }
+
+    .head {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: black;
+    }
+
+    .body {
+      width: 4px;
+      height: 80px;
+      background-color: black;
+      margin-top: 5px;
+    }
+
+    .arms {
+      width: 80px;
+      height: 20px;
+      margin-top: -10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .arm {
+      width: 40px;
+      height: 2px;
+      background-color: black;
+      transform-origin: left center;
+    }
+
+    .legs {
+      width: 40px;
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      margin-top: -2px;
+    }
+
+    .leg {
+      width: 2px;
+      height: 60px;
+      background-color: black;
+    }
+
+    /* MOVEMENTS */
+    @keyframes moveBoy {
+      0% { left: -120px; }
+      70% { left: 45%; }
+      100% { left: 46%; }
+    }
+
+    @keyframes moveGirl {
+      0% { right: -120px; }
+      70% { right: 45%; }
+      100% { right: 46%; }
+    }
+
+    /* COLORS for boy and girl */
+    .stickboy .head {
+      background-color: #0000FF; /* Blue */
+    }
+
+    .stickboy .body {
+      background-color: #0000FF; /* Blue */
+    }
+
+    .stickboy .arm {
+      background-color: #0000FF; /* Blue */
+    }
+
+    .stickboy .leg {
+      background-color: #0000FF; /* Blue */
+    }
+
+    .stickgirl .head {
+      background-color: #FF69B4; /* Pink */
+    }
+
+    .stickgirl .body {
+      background-color: #FF69B4; /* Pink */
+    }
+
+    .stickgirl .arm {
+      background-color: #FF69B4; /* Pink */
+    }
+
+    .stickgirl .leg {
+      background-color: #FF69B4; /* Pink */
+    }
+
+    /* HEART */
+    .heart {
+      width: 100px;
+      height: 90px;
+      position: absolute;
+      top: 20%;
+      animation: beat 1s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 50px;
+      height: 80px;
+      background: red;
+      border-radius: 50px 50px 0 0;
+      top: 0;
+    }
+    .heart::before {
+      left: 50%;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+    .heart::after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    @keyframes beat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
+
+  <!-- Google font for handwritten -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="handwritten">I Love You</div>
+
+  <div class="stickboy">
+    <div class="head"></div>
+    <div class="arms">
+      <div class="arm" id="boy-left-arm"></div>
+      <div class="arm" id="boy-right-arm"></div>
+    </div>
+    <div class="body"></div>
+    <div class="legs">
+      <div class="leg"></div>
+      <div class="leg"></div>
+    </div>
+  </div>
+
+  <div class="stickgirl">
+    <div class="head"></div>
+    <div class="arms">
+      <div class="arm" id="girl-left-arm"></div>
+      <div class="arm" id="girl-right-arm"></div>
+    </div>
+    <div class="body"></div>
+    <div class="legs">
+      <div class="leg"></div>
+      <div class="leg"></div>
+    </div>
+  </div>
+
+  <div class="heart"></div>
+
+  <script>
+    // Make them hug after walking
+    setTimeout(() => {
+      document.getElementById('boy-left-arm').style.transform = "rotate(30deg)";
+      document.getElementById('boy-right-arm').style.transform = "rotate(-30deg)";
+      document.getElementById('girl-left-arm').style.transform = "rotate(-30deg)";
+      document.getElementById('girl-right-arm').style.transform = "rotate(30deg)";
+    }, 5000);
+  </script>
+
+</body>
+</html>
